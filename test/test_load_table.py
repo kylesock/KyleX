@@ -4,8 +4,10 @@ from test.test_suite import TEST_USER_TABLE_FILE_PATH
 import unittest
 
 
-class TestLoadData(KyleXTestSuite):
-
+class TestLoadTable(KyleXTestSuite):
+    """
+    Unit Tests for the load_table method
+    """
     def test_load_data_columns(self) -> None:
         """
         Tests the correct columns are present when load_data called

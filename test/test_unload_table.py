@@ -4,9 +4,12 @@ from test.test_suite import KyleXTestSuite
 from test.test_suite import TEST_USER_TABLE_FILE_PATH
 
 import unittest
-import pandas as pd
 
-class TestUnloadData(KyleXTestSuite):
+
+class TestUnloadTable(KyleXTestSuite):
+    """
+    Unit Tests for the unload_table method
+    """
 
     def test_unload_data_columns(self) -> None:
         """

@@ -4,8 +4,10 @@ from test.test_suite import KyleXTestSuite
 import unittest
 
 
-class TestValidCreds(KyleXTestSuite):
-
+class TestValidateCredentials(KyleXTestSuite):
+    """
+    Provides Unit Tests for the validate_credentials method
+    """
     def test_valid_creds_valid_user(self) -> None:
         """
         Tests A TRUE flag given when VALID user inputs username & password
