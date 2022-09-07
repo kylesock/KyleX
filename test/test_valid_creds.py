@@ -1,29 +1,10 @@
-from base.utils import load_table
-from base.utils import unload_table
 from base.utils import validate_credentials
-
+from test.test_suite import KyleXTestSuite
 
 import unittest
 
-# user table file path - csv
-TEST_USER_TABLE_FILE_PATH = '../data/test_user_table.csv'
 
-
-class TestValidCreds(unittest.TestCase):
-
-    test_user_table = None
-
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.test_user_table = load_table(path=TEST_USER_TABLE_FILE_PATH)
-        print('')
-        print('setUpClass')
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        unload_table(df=cls.test_user_table, path=TEST_USER_TABLE_FILE_PATH)
-        print('')
-        print('tearDownClass')
+class TestValidCreds(KyleXTestSuite):
 
     def test_valid_creds_valid_user(self) -> None:
         """

@@ -1,31 +1,10 @@
-from base.utils import load_table
-from base.utils import unload_table
-
+from test.test_suite import KyleXTestSuite
+from test.test_suite import TEST_USER_TABLE_FILE_PATH
 
 import unittest
 
-# user table file path - csv
-TEST_USER_TABLE_FILE_PATH = '../data/test_user_table.csv'
 
-
-class TestLoadData(unittest.TestCase):
-
-    test_user_table = None
-
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.test_user_table = load_table(path=TEST_USER_TABLE_FILE_PATH)
-        print('')
-        print('setUpClass')
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        unload_table(df=cls.test_user_table, path=TEST_USER_TABLE_FILE_PATH)
-        print('')
-        print('tearDownClass')
-
-    def __init__(self):
-        self.user_table = load_table(path=TEST_USER_TABLE_FILE_PATH)
+class TestLoadData(KyleXTestSuite):
 
     def test_load_data_columns(self) -> None:
         """
@@ -34,8 +13,8 @@ class TestLoadData(unittest.TestCase):
         print('')
         print('******test_load_data_columns******')
 
-        result = list(self.user_table.columns)
-        expected_result = ['user_id', 'username', 'password', 'user_type']
+        result = list(self.test_user_table.columns)
+        expected_result = ['username', 'password', 'user_type']
         print(f'load_data({TEST_USER_TABLE_FILE_PATH})')
         print(f'resulting headers: {result}')
         print(f'expected headers: {expected_result}')
@@ -48,7 +27,7 @@ class TestLoadData(unittest.TestCase):
         print('')
         print('******test_load_data_not_empty******')
 
-        result = list(self.user_table.loc[2])
+        result = list(self.test_user_table.loc[2])
         expected_result = ['test_user', 'test_pwd', 'user']
         print(f'load_data({TEST_USER_TABLE_FILE_PATH})')
         print(f'response: {result}')
