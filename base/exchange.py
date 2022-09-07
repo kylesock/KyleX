@@ -1,84 +1,15 @@
-from base.errors import PermissionDeniedException
+from base.utils import load_table
+from base.utils import validate_credentials
+from base.utils import admin_method
 
 __all__ = [
     'Exchange'
 ]
 
-from functools import wraps
-import pandas as pd
 from typing import Optional
 
 # user table file path - csv
 PROD_USER_TABLE_FILE_PATH = '../data/user_table.csv'
-
-
-# load user table from file path
-def load_table(path: str) -> pd.DataFrame:
-    """
-    Loads the User Table for Authorisation to reach private and admin endpoints.
-    """
-    # open user table csv file
-    df = pd.read_csv(path, index_col=0)
-    print('Table Loaded.')
-    return df
-
-
-# unload user table to file path
-def unload_table(df: pd.DataFrame, path: str) -> None:
-    """
-    Unloads the User Table Object, saving any changes back to the csv
-    """
-    df.to_csv(path)
-    print('Table Unloaded')
-
-
-def validate_credentials(table: pd.DataFrame, user_id: int, password: str) -> bool:
-    if user_id not in table.index:
-        return False
-    else:
-        user_profile = table.loc[user_id]
-        if (password != user_profile.password) or (user_profile.user_type == 'deactivated'):
-            return False
-
-        return True
-
-
-def admin_method(func):
-    """
-    Decorator for admin methods to block public or private viewers utilising
-    :param func: endpoint being requested by the user
-    :return: PermissionDeniedException if not sufficient conditions, else the endpoint is reached as intended
-    """
-
-    @wraps(func)
-    def wrapper_admin_method(self, *args, **kwargs):
-        if self.endpoints == 'admin':
-            func(*args, **kwargs)
-        else:
-            raise PermissionDeniedException(endpoint=func.__name__,
-                                            user_type=self.endpoints,
-                                            permission_required='admin')
-
-    return wrapper_admin_method
-
-
-def private_method(func):
-    """
-    Decorator for private methods to block public viewers utilising
-    :param func: endpoint being requested by the user
-    :return: PermissionDeniedException if not sufficient conditions, else the endpoint is reached as intended
-    """
-
-    @wraps(func)
-    def wrapper_private_method(self, *args, **kwargs):
-        if self.endpoints in ['private', 'admin']:
-            func(*args, **kwargs)
-        else:
-            raise PermissionDeniedException(endpoint=func.__name__,
-                                            user_type=self.endpoints,
-                                            permission_required='private')
-
-    return wrapper_private_method
 
 
 class Exchange(object):

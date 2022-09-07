@@ -1,5 +1,9 @@
+from base.utils import load_table
+from base.utils import unload_table
+from base.utils import validate_credentials
+
+
 import unittest
-import base
 
 # user table file path - csv
 TEST_USER_TABLE_FILE_PATH = '../data/test_user_table.csv'
@@ -11,13 +15,13 @@ class TestValidCreds(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.test_user_table = base.load_table(path=TEST_USER_TABLE_FILE_PATH)
+        cls.test_user_table = load_table(path=TEST_USER_TABLE_FILE_PATH)
         print('')
         print('setUpClass')
 
     @classmethod
     def tearDownClass(cls) -> None:
-        base.unload_table(df=cls.test_user_table, path=TEST_USER_TABLE_FILE_PATH)
+        unload_table(df=cls.test_user_table, path=TEST_USER_TABLE_FILE_PATH)
         print('')
         print('tearDownClass')
 
@@ -29,10 +33,10 @@ class TestValidCreds(unittest.TestCase):
         print('******test_valid_creds_valid_user******')
 
         test_user_id, test_password = 2, 'test_pwd'
-        result = base.validate_credentials(table=self.test_user_table,
-                                           user_id=test_user_id, password=test_password)
+        result = validate_credentials(table=self.test_user_table,
+                                      user_id=test_user_id, password=test_password)
         expected_result = True
-        print(f'validate_credentials(test_user_table_file_object,{test_user_id}, {test_password})')
+        print(f'validate_credentials(self.test_user_table,{test_user_id}, {test_password})')
         print(f'result: {result}')
         print(f'expected result: {expected_result}')
         self.assertTrue(result)
@@ -45,10 +49,10 @@ class TestValidCreds(unittest.TestCase):
         print('******test_valid_creds_deactivated_user******')
 
         test_user_id, test_password = 4, 'test_pwd'
-        result = base.validate_credentials(table=self.test_user_table,
-                                           user_id=test_user_id, password=test_password)
+        result = validate_credentials(table=self.test_user_table,
+                                      user_id=test_user_id, password=test_password)
         expected_result = False
-        print(f'validate_credentials(test_user_table_file_object,{test_user_id}, {test_password})')
+        print(f'validate_credentials(self.test_user_table,{test_user_id}, {test_password})')
         print(f'result: {result}')
         print(f'expected result: {expected_result}')
         self.assertFalse(result)
@@ -61,10 +65,10 @@ class TestValidCreds(unittest.TestCase):
         print('******test_valid_creds_invalid_user******')
 
         test_user_id, test_password = -1, 'test_pwd'
-        result = base.validate_credentials(table=self.test_user_table,
-                                           user_id=test_user_id, password=test_password)
+        result = validate_credentials(table=self.test_user_table,
+                                      user_id=test_user_id, password=test_password)
         expected_result = False
-        print(f'validate_credentials(test_user_table_file_object,{test_user_id}, {test_password})')
+        print(f'validate_credentials(self.test_user_table,{test_user_id}, {test_password})')
         print(f'result: {result}')
         print(f'expected result: {expected_result}')
         self.assertFalse(result)
@@ -77,10 +81,10 @@ class TestValidCreds(unittest.TestCase):
         print('******test_valid_creds_invalid_pwd******')
 
         test_user_id, test_password = 2, 'invalid_test_pwd'
-        result = base.validate_credentials(table=self.test_user_table,
-                                           user_id=test_user_id, password=test_password)
+        result = validate_credentials(table=self.test_user_table,
+                                      user_id=test_user_id, password=test_password)
         expected_result = False
-        print(f'validate_credentials(test_user_table_file_object,{test_user_id}, {test_password})')
+        print(f'validate_credentials(self.test_user_table,{test_user_id}, {test_password})')
         print(f'result: {result}')
         print(f'expected result: {expected_result}')
         self.assertFalse(result)
@@ -93,10 +97,10 @@ class TestValidCreds(unittest.TestCase):
         print('******test_valid_creds_both_empty******')
 
         test_user_id, test_password = 0, ''
-        result = base.validate_credentials(table=self.test_user_table,
-                                           user_id=test_user_id, password=test_password)
+        result = validate_credentials(table=self.test_user_table,
+                                      user_id=test_user_id, password=test_password)
         expected_result = False
-        print(f'validate_credentials(test_user_table_file_object,{test_user_id}, {test_password})')
+        print(f'validate_credentials(self.test_user_table,{test_user_id}, {test_password})')
         print(f'result: {result}')
         print(f'expected result: {expected_result}')
         self.assertFalse(result)
@@ -109,10 +113,10 @@ class TestValidCreds(unittest.TestCase):
         print('******test_valid_creds_no_password******')
 
         test_user_id, test_password = 2, ''
-        result = base.validate_credentials(table=self.test_user_table,
-                                           user_id=test_user_id, password=test_password)
+        result = validate_credentials(table=self.test_user_table,
+                                      user_id=test_user_id, password=test_password)
         expected_result = False
-        print(f'validate_credentials(test_user_table_file_object,{test_user_id}, {test_password})')
+        print(f'validate_credentials(self.test_user_table,{test_user_id}, {test_password})')
         print(f'result: {result}')
         print(f'expected result: {expected_result}')
         self.assertFalse(result)
