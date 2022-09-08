@@ -2,7 +2,8 @@ import unittest
 from base.utils import load_table
 from base.utils import unload_table
 
-TEST_USER_TABLE_FILE_PATH = '../data/test_user_table.csv'
+TEST_USER_TABLE_FILE_PATH = '/Users/kylesock/PycharmProjects/KyleX/data/test_user_table.csv'
+TEST_USER_TABLE_COPY_FILE_PATH = '/Users/kylesock/PycharmProjects/KyleX/data/test_user_table_copy.csv'
 
 
 class KyleXTestSuite(unittest.TestCase):

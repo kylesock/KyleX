@@ -9,11 +9,11 @@ __all__ = [
 from typing import Optional
 
 # user table file path - csv
-PROD_USER_TABLE_FILE_PATH = '../data/user_table.csv'
+PROD_USER_TABLE_FILE_PATH = '/Users/kylesock/PycharmProjects/KyleX/data/user_table.csv'
 
 
 class Exchange(object):
-    def __init__(self, user_id: Optional[int], password: Optional[str]) -> None:
+    def __init__(self, user_id: Optional[int] = None, password: Optional[str] = None) -> None:
 
         self.user_table = load_table(PROD_USER_TABLE_FILE_PATH)
         self.endpoints: str = 'public'
@@ -31,6 +31,18 @@ class Exchange(object):
                 print(f'Welcome {self.user_table.loc[self.user_id].username}.')
             else:
                 print('Invalid username password combination.')
+
+    def __repr__(self) -> str:
+        return str({'login_status': self.login_status,
+                    'user_id': self.user_id,
+                    'password': self.password,
+                    'endpoints': self.endpoints})
+
+    def __str__(self) -> str:
+        return str({'login_status': self.login_status,
+                    'user_id': self.user_id,
+                    'password': self.password,
+                    'endpoints': self.endpoints})
 
     def user_login(self, user_id: int, password: str) -> str:
         """

@@ -1,7 +1,7 @@
 from base.utils import load_table
 from base.utils import unload_table
 from test.test_suite import KyleXTestSuite
-from test.test_suite import TEST_USER_TABLE_FILE_PATH
+from test.test_suite import TEST_USER_TABLE_COPY_FILE_PATH
 
 import unittest
 
@@ -18,12 +18,11 @@ class TestUnloadTable(KyleXTestSuite):
         print('')
         print('******test_unload_data_columns******')
 
-        compare_file_path = TEST_USER_TABLE_FILE_PATH[:-4] + '_copy.csv'
-        unload_table(df=self.test_user_table, path=compare_file_path)
+        unload_table(df=self.test_user_table, path=TEST_USER_TABLE_COPY_FILE_PATH)
 
-        result = load_table(compare_file_path)
+        result = load_table(TEST_USER_TABLE_COPY_FILE_PATH)
         expected_result = self.test_user_table
-        print(f'unload_data({compare_file_path})')
+        print(f'unload_data({TEST_USER_TABLE_COPY_FILE_PATH})')
         print(f'resulting table: \n{result}')
         print(f'\nexpected table: \n{expected_result}')
         self.assert_(all(result == expected_result))
