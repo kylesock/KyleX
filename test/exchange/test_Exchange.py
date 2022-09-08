@@ -447,6 +447,10 @@ class TestAddUser(KyleXTestSuite):
         self.assertTrue(initial_table.equals(test_prod_mock_session.user_table.iloc[:-1]))
         test_prod_mock_session.user_table = initial_table.copy()
 
+class TestDeleteUser(KyleXTestSuite):
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
