@@ -1,5 +1,5 @@
-from test.test_suite import KyleXTestSuite
-from test.test_suite import TEST_USER_TABLE_FILE_PATH
+from test.utils.test_suite import KyleXTestSuite
+from test.utils.test_suite import TEST_USER_TABLE_FILE_PATH
 
 import unittest
 

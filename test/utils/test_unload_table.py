@@ -1,7 +1,7 @@
 from base.utils import load_table
 from base.utils import unload_table
-from test.test_suite import KyleXTestSuite
-from test.test_suite import TEST_USER_TABLE_COPY_FILE_PATH
+from test.utils.test_suite import KyleXTestSuite
+from test.utils.test_suite import TEST_USER_TABLE_COPY_FILE_PATH
 
 import unittest
 
@@ -25,7 +25,7 @@ class TestUnloadTable(KyleXTestSuite):
         print(f'unload_data({TEST_USER_TABLE_COPY_FILE_PATH})')
         print(f'resulting table: \n{result}')
         print(f'\nexpected table: \n{expected_result}')
-        self.assert_(all(result == expected_result))
+        self.assertTrue(result.equals(expected_result))
 
 
 if __name__ == '__main__':

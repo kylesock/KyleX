@@ -1,6 +1,7 @@
 import pandas as pd
 from functools import wraps
 from base.errors import PermissionDeniedException
+import os
 
 __all__ = [
     'load_table',
@@ -42,6 +43,34 @@ def validate_credentials(table: pd.DataFrame, user_id: int, password: str) -> bo
         return True
 
 
+def testing_guard(decorator_func):
+    """
+    Decorator that only applies another decorator if the TESTING environment
+    variable is not set.
+
+    Args:
+        decorator_func: The decorator function.
+
+    Returns:
+        Function that calls a function after applying the decorator if TESTING
+        environment variable is not set and calls the plain function if it is set.
+    """
+
+    def replacement(original_func):
+        """Function that is called instead of original function."""
+
+        def apply_guard(*args, **kwargs):
+            """Decides whether to use decorator on function call."""
+            if os.getenv('TESTING') is not None:
+                return original_func(*args, **kwargs)
+            return decorator_func(original_func)(*args, **kwargs)
+
+        return apply_guard
+
+    return replacement
+
+
+@testing_guard
 def admin_method(func):
     """
     Decorator for admin methods to block public or private viewers utilising
@@ -61,6 +90,7 @@ def admin_method(func):
     return wrapper_admin_method
 
 
+@testing_guard
 def private_method(func):
     """
     Decorator for private methods to block public viewers utilising

@@ -56,6 +56,7 @@ class Exchange(object):
             return 'Already logged in.'
 
         valid_login = validate_credentials(self.user_table, user_id, password)
+
         if valid_login:
             self.login_status = 1
             self.user_id = user_id
@@ -97,11 +98,12 @@ class Exchange(object):
         :return: message on completion / failure of task
         """
 
-        if username in self.user_table.username:
-            return 'username taken, please try another one'
+        if username in self.user_table.username.values:
+            return 'Username taken, please try another one.'
 
         user_id = max(self.user_table.index) + 1
         self.user_table.at[user_id] = [username, password, user_type]
+        #self.user_table.to_csv(PROD_USER_TABLE_FILE_PATH)
         return f'User {username}(type {user_type}) successfully created.'
 
     @admin_method

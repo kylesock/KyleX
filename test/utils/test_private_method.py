@@ -1,4 +1,4 @@
-from test.test_suite import KyleXTestSuite
+from test.utils.test_suite import KyleXTestSuite
 from base.utils import private_method
 from base.exchange import Exchange
 from base.errors import PermissionDeniedException

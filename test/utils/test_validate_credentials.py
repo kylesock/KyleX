@@ -1,5 +1,5 @@
 from base.utils import validate_credentials
-from test.test_suite import KyleXTestSuite
+from test.utils.test_suite import KyleXTestSuite
 
 import unittest
 
