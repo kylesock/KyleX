@@ -448,7 +448,7 @@ class TestAddUser(KyleXTestSuite):
         test_prod_mock_session.user_table = initial_table.copy()
 
 class TestDeleteUser(KyleXTestSuite):
-
+    pass
 
 
 
