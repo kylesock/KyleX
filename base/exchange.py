@@ -103,7 +103,7 @@ class Exchange(object):
 
         user_id = max(self.user_table.index) + 1
         self.user_table.at[user_id] = [username, password, user_type]
-        #self.user_table.to_csv(PROD_USER_TABLE_FILE_PATH)
+        # self.user_table.to_csv(PROD_USER_TABLE_FILE_PATH)
         return f'User {username}(type {user_type}) successfully created.'
 
     @admin_method
