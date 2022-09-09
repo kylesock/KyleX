@@ -14,7 +14,7 @@ class KyleXTestSuite(unittest.TestCase):
     """
 
     test_user_table = None
-    os.environ['TESTING'] = ''
+    os.environ['TESTING'] = 'NO'
 
     @classmethod
     def setUpClass(cls) -> None:

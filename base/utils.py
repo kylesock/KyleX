@@ -61,7 +61,7 @@ def testing_guard(decorator_func):
 
         def apply_guard(*args, **kwargs):
             """Decides whether to use decorator on function call."""
-            if os.getenv('TESTING') is not None:
+            if os.getenv('TESTING') != 'YES':
                 return original_func(*args, **kwargs)
             return decorator_func(original_func)(*args, **kwargs)
 

@@ -3,6 +3,7 @@ from base.utils import private_method
 from base.exchange import Exchange
 from base.errors import PermissionDeniedException
 
+import os
 import unittest
 
 
@@ -10,6 +11,8 @@ class TestPrivateMethod(KyleXTestSuite):
     """
     Provides Unit Tests for the private_method decorator
     """
+
+    os.environ['TESTING'] = 'YES'
 
     def test_valid_admin_private_access(self) -> None:
         """
